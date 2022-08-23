@@ -1,0 +1,5 @@
+VOCdevkit/*
+*.tar*
+*__pycache__*
+data/*
+!data/sample/
