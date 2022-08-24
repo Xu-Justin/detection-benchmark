@@ -1,29 +1,6 @@
 import os
 import xml.etree.ElementTree as ET
 
-pascal_classes = [
-    "aeroplane",
-    "bicycle",
-    "bird",
-    "boat",
-    "bottle",
-    "bus",
-    "car",
-    "cat",
-    "chair",
-    "cow",
-    "diningtable",
-    "dog",
-    "horse",
-    "motorbike",
-    "person",
-    "pottedplant",
-    "sheep",
-    "sofa",
-    "train",
-    "tvmonitor"
-]
-
 def convert_pascal_annotations(source, target, overwrite=False):
     assert os.path.exists(source), f"Source {source} don't exists"
     assert overwrite or not os.path.exists(target), f"Target {target} already exists and overwrite is False"
@@ -35,24 +12,25 @@ def convert_pascal_annotations(source, target, overwrite=False):
 
         for child in root:
             if child.tag == 'object':
+
+                class_name = xmin = ymin = xmax = ymax = None
                 
                 for attribute in child:
                     if attribute.tag == 'name':
                         class_name = attribute.text
-                        class_id = pascal_classes.index(class_name)
 
                     if attribute.tag == 'bndbox':
                         for cord in attribute:
-                            if cord.tag == 'xmin': xmin = cord.text
-                            if cord.tag == 'ymin': ymin = cord.text
-                            if cord.tag == 'xmax': xmax = cord.text
-                            if cord.tag == 'ymax': ymax = cord.text
+                            if cord.tag == 'xmin': xmin = int(cord.text)
+                            if cord.tag == 'ymin': ymin = int(cord.text)
+                            if cord.tag == 'xmax': xmax = int(cord.text)
+                            if cord.tag == 'ymax': ymax = int(cord.text)
 
-                assert class_id is None or xmin is None or ymin is None or xmax is None or ymax is None, f"Invalid object with class_id {class_id} xmin {xmin} ymin {ymin} xmax {xmax} ymax {ymax}"
+                assert class_name is not None and xmin is not None and ymin is not None and xmax is not None and ymax is not None, f"Invalid object with class_name {class_name} xmin {xmin} ymin {ymin} xmax {xmax} ymax {ymax}"
                 assert xmin <= xmax, f"Invalid object with xmin {xmin} larger than xmax {xmax}"
                 assert ymin <= ymax, f"Invalid object with ymin {ymin} larger than ymax {ymax}"
 
-                line = f"{class_id} {xmin} {ymin} {xmax} {ymax}\n"
+                line = f"{class_name} {xmin} {ymin} {xmax} {ymax}\n"
                 f.write(line)
 
 if __name__ == '__main__':
