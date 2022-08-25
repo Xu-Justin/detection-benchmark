@@ -6,6 +6,8 @@ An application to evaluate a detection model performance.
 
 This application will load a dataset, then send a POST request for each image to an endpoint. The endpoint is expected to return bounding boxes for given image. After all images is sent, the application will evaluate the results using the metrics AP, AP50, AP75, AR1, AR10, and AR100.
 
+**DISCLAIMER: Metrics calculation is done using [TorchMetrics](https://torchmetrics.readthedocs.io/en/stable/detection/mean_average_precision.html)**
+
 ## Dataset
 
 Dataset must have the following format
