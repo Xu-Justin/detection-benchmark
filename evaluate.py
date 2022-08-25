@@ -4,6 +4,7 @@ import requests
 import datetime
 from dataset import Dataset
 from utils import strip_ext, create_report
+from tqdm import tqdm
 
 def get_args_parser():
     import argparse
@@ -43,7 +44,7 @@ def main(args):
     folder_predictions = os.path.join(folder_output, "predictions")
     os.makedirs(folder_predictions)
 
-    for i in range(dataset.num_of_images):
+    for i in tqdm(range(dataset.num_of_images)):
         image_path = dataset.get_image_path(i)
         response = send_image(args.url, image_path)
         
@@ -67,6 +68,8 @@ def main(args):
     report_file_name = "report.md"
     report_path = os.path.join(folder_output, report_file_name)
     create_report(dataset, report_path, folder_predictions, args.title, args.desc)
+
+    print(f"Evaluation result saved to {folder_output}")
     
 if __name__ == '__main__':
     args = get_args_parser()
