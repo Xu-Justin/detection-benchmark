@@ -3,3 +3,5 @@ VOCdevkit/*
 *__pycache__*
 data/*
 !data/sample/
+results/*
+!result/sample/
