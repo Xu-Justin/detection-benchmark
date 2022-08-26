@@ -43,7 +43,7 @@ def create_report_dataset(dataset):
         ["Number of classes", f"{dataset.num_of_classes}"],
         ["Classes", f"{dataset.classes}"],
         ["Number of images", f"{dataset.num_of_images}"],
-        ["Images", f"{dataset.images[:min(len(dataset.images), MAX_REPR_INDEX)]}{'(truncated)' if len(dataset.images) > MAX_REPR_INDEX else ''}"]
+        ["Images", f"{dataset.images[:min(len(dataset.images), MAX_REPR_INDEX)]}{' (truncated)' if len(dataset.images) > MAX_REPR_INDEX else ''}"]
     ]
 
     return (
