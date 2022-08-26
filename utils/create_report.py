@@ -67,10 +67,8 @@ def create_report_metrics(metrics):
         f"{create_table(table_header, table_contents)}\n"
     )
 
-def create_report(dataset, output, folder_predictions, title, desc, overwrite=False):
+def create_report(dataset, output, metrics, title, desc, overwrite=False):
     assert overwrite or not os.path.exists(output), f"Output {output} already exists and overwrite is False"
-    
-    metrics = dataset.calculate_mAP(folder_predictions)
 
     markdown = ""
     markdown += create_report_header(title, desc)
