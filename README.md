@@ -77,11 +77,11 @@ python3 dummy_server.py --host 0.0.0.0 --port 8000
 While server endpoint is running, run the following command on terminal to start the evaluation process.
 
 ```bash
-python3 evaluate.py
-    --dataset data/sample/
-    --url http://localhost:8000
-    --output results/
-    --title my_first_evaluation
+python3 evaluate.py \
+    --dataset data/sample/ \
+    --url http://localhost:8000 \
+    --output results/ \
+    --title my_first_evaluation \
     --desc "This is the description about my first evaluation experience"
 ```
 
@@ -94,11 +94,11 @@ In some case, you might not want to provide an endpoint. In this case, you still
 Then, run the following command to start the evaluation process.
 
 ```bash
-python3 calculate.py
-    --dataset data/sample/
-    --predictions predicted_annotations/
-    --output report.md
-    --title my_first_evaluation
+python3 calculate.py \
+    --dataset data/sample/ \
+    --predictions predicted_annotations/ \
+    --output report.md \
+    --title my_first_evaluation \
     --desc "This is the description about my first evaluation experience"
 ```
 
